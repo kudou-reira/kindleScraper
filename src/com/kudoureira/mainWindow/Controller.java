@@ -31,6 +31,9 @@ public class Controller {
             Boolean login = kindle.processBooks();
             if(!login) {
                 ourLabel.setText("Login failed, please try again");
+            } else {
+                ourLabel.setText("Your books have been processed");
+                kindle.dump();
             }
         }
 

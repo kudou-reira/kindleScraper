@@ -29,6 +29,10 @@ public class AmazonKindle {
         this.password = password;
     }
 
+    public ArrayList<Book> getBooks() {
+        return books;
+    }
+
     public boolean processBooks() {
 //        System.setProperty("webdriver.gecko.driver", "D:\\Dropbox\\javaDependencies\\geckodriver-v0.19.1-win64\\geckodriver.exe");
 
@@ -54,21 +58,19 @@ public class AmazonKindle {
 //                ExpectedConditions.presenceOfElementLocated(By.className("KindleAppContainer"))));
 
 
-
-
-
-
-
         ((JavascriptExecutor)driver).executeScript("window.open()");
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
         driver.get("https://read.amazon.co.jp/kp/notebook");
+        System.out.println("moving to new site notebook site");
 
-        Boolean isNotLoggedIn = driver.findElements(By.className("a-spacing-small")).size() > 0;
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        Boolean loggedIn = driver.findElements(By.className("kp-notebook-selectable")).size() > 0;
+        System.out.println("this is logged in " + loggedIn);
 
         // do a check here and print out to user to tell him/her if login was successful
 
-        if(isNotLoggedIn) {
+        if(!loggedIn) {
             System.out.println("not logged in");
             driver.quit();
             return false;
@@ -145,6 +147,7 @@ public class AmazonKindle {
             System.out.println("this is the notes number " + notesNumber);
             System.out.println("these are the annotations made " + words);
         }
+//        dump();
     }
 
     private HashSet<String> processAnnotations(Elements highlights) {
