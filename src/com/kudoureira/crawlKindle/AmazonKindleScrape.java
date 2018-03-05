@@ -17,14 +17,14 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-public class AmazonKindle {
+public class AmazonKindleScrape {
     private String email;
     private String password;
     private ArrayList<String> divIds = new ArrayList<>();
     private ArrayList<Book> books = new ArrayList<>();
     private WebDriver driver = new FirefoxDriver();
 
-    public AmazonKindle(String email, String password) {
+    public AmazonKindleScrape(String email, String password) {
         this.email = email;
         this.password = password;
     }
@@ -64,7 +64,7 @@ public class AmazonKindle {
         driver.get("https://read.amazon.co.jp/kp/notebook");
         System.out.println("moving to new site notebook site");
 
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Boolean loggedIn = driver.findElements(By.className("kp-notebook-selectable")).size() > 0;
         System.out.println("this is logged in " + loggedIn);
 
@@ -99,6 +99,7 @@ public class AmazonKindle {
         BufferedWriter writer;
         try {
             writer = new BufferedWriter(new FileWriter("D:\\Dropbox\\kindleLandingPage.txt"));
+//            writer = new BufferedWriter(new FileWriter("C:\\Users\\yuzuna\\Dropbox\\kindleLandingPage.txt"));
             writer.write(doc.toString());
         } catch(IOException ie) {
             ie.printStackTrace();

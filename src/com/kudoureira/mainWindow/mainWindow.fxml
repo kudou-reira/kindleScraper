@@ -17,9 +17,11 @@
     <PasswordField fx:id="passwordField" GridPane.rowIndex="4" GridPane.columnIndex="1"
                    onKeyReleased="#handleKeyReleased"/>
     <Button fx:id="loginButton" text="login" GridPane.rowIndex="4" GridPane.columnIndex="2"
-            onAction="#onButtonClicked"/>
+            onAction="#onLoginButtonClicked"/>
     <CheckBox fx:id="ourCheckBox" text="Clear password field after unsuccessful login" GridPane.rowIndex="6"
               GridPane.columnIndex="0" GridPane.columnSpan="2"
               onAction="#handleChange" selected="true"/>
     <Label fx:id="ourLabel" text="No action taken" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+    <Button fx:id="changeHTMLScan" text="scan HTML files instead" GridPane.rowIndex="8" GridPane.columnIndex="0"
+            onAction="#onHTMLScanClicked"/>
 </GridPane>
