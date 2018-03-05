@@ -1,6 +1,7 @@
 package com.kudoureira.mainWindow;
 
 import com.kudoureira.crawlKindle.AmazonKindleScrape;
+import com.kudoureira.htmlKindle.HTMLScrape;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,11 +34,15 @@ public class Controller implements Initializable{
     @FXML
     private Label ourLabel;
     @FXML
+    private Label filesLabel;
+    @FXML
     private Button loginButton;
     @FXML
     private Button changeHTMLScan;
     @FXML
     private Button changeKindleScraper;
+    @FXML
+    private Button parseFiles;
 
 
     @FXML
@@ -83,16 +88,6 @@ public class Controller implements Initializable{
             stage.setScene(scene);
             stage.show();
         }
-
-//        System.out.println("html scan clicked");
-//        Stage stage = new Stage();
-//        stage.setTitle("HTML Scan");
-//        Pane htmlPane = null;
-//        htmlPane = FXMLLoader.load(getClass().getResource("htmlWindow.fxml"));
-//        Scene htmlScene = new Scene(htmlPane, 900, 350);
-//        stage.setScene(htmlScene);
-
-//        stage.show();
     }
 
     public void onKindleScraperButtonClicked(ActionEvent e) throws IOException {
@@ -109,22 +104,37 @@ public class Controller implements Initializable{
         stage.show();
     }
 
+    public void onParseButtonClicked(ActionEvent e) {
+        if(e.getSource().equals(parseFiles)) {
+            System.out.println("on parse button clicked");
+            HTMLScrape notebook = new HTMLScrape(files);
+            notebook.scan();
+        }
+    }
+
 
     @FXML
     public void onDirectoryButtonClicked(ActionEvent e) throws IOException {
         System.out.println("directory button clicked");
         String path = System.getProperty("user.dir");
+        String testPath = "D:\\Dropbox\\kindleScans";
 
         JFrame frame = new JFrame("Simple GUI");
         FileDialog fd = new FileDialog(frame, "Choose a file", FileDialog.LOAD);
-        fd.setDirectory(path);
+        fd.setDirectory(testPath);
         fd.setFile("*.html");
         fd.setVisible(true);
 //        String filename = fd.getFile();
         files = fd.getFiles();
 
-        for(File file : files) {
-            System.out.println("this is files " + file);
+        if(files.length != 0) {
+            StringBuilder sb = new StringBuilder();
+            for(File file : files) {
+                System.out.println("this is files " + file);
+                sb.append(file);
+                sb.append("\n");
+            }
+            filesLabel.setText("These are your selected files" + "\n" + sb);
         }
 
 //        if (filename == null)

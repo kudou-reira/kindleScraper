@@ -11,8 +11,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("mainWindow.fxml"));
-        primaryStage.setTitle("Amazon Kindle Scraper");
+        Parent root = FXMLLoader.load(getClass().getResource("htmlWindow.fxml"));
+        primaryStage.setTitle("Local HTML Scraper");
         primaryStage.setScene(new Scene(root, 900, 350));
         primaryStage.show();
 

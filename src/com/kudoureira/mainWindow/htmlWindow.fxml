@@ -12,6 +12,9 @@
     <Label text="Welcome to Amazon Kindle Highlight Processor" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
     <Button fx:id="directoryButton" text="Select the directory your HTML Kindle exports are in" GridPane.rowIndex="0" GridPane.columnIndex="2"
             onAction="#onDirectoryButtonClicked"/>
-    <Button fx:id="changeKindleScraper" text="Use kindle scraper instead" GridPane.rowIndex="1" GridPane.columnIndex="0"
+    <Button fx:id="changeKindleScraper" text="Use kindle scraper instead" GridPane.rowIndex="10" GridPane.columnIndex="2"
             onAction="#onKindleScraperButtonClicked"/>
+    <Button fx:id="parseFiles" text="Scan files" GridPane.rowIndex="4" GridPane.columnIndex="2"
+            onAction="#onParseButtonClicked"/>
+    <Label fx:id="filesLabel" text="No files selected" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
 </GridPane>
