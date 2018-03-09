@@ -15,6 +15,16 @@ public class Book {
         this.words = words;
     }
 
+    @Override
+    public String toString() {
+        return "Book{" +
+                "lastAccessed='" + lastAccessed + '\'' +
+                ", bookTitle='" + bookTitle + '\'' +
+                ", creators='" + creators + '\'' +
+                ", words=" + words +
+                '}';
+    }
+
     public String getLastAccessed() {
         return lastAccessed;
     }

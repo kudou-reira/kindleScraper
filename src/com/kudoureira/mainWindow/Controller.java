@@ -1,6 +1,7 @@
 package com.kudoureira.mainWindow;
 
 import com.kudoureira.crawlKindle.AmazonKindleScrape;
+import com.kudoureira.dictionary.Novels;
 import com.kudoureira.htmlKindle.HTMLScrape;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -109,6 +110,9 @@ public class Controller implements Initializable{
             System.out.println("on parse button clicked");
             HTMLScrape notebook = new HTMLScrape(files);
             notebook.scan();
+            System.out.println("this is books " + notebook.getBooks().toString());
+            Novels novels = new Novels(notebook.getBooks());
+            novels.compile();
         }
     }
 

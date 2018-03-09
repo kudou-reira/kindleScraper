@@ -20,6 +20,17 @@ public class HTMLScrape {
         this.files = files;
     }
 
+    public ArrayList<Book> getBooks() {
+        return books;
+    }
+
+    @Override
+    public String toString() {
+        return "HTMLScrape{" +
+                "books=" + books +
+                '}';
+    }
+
     public void scan() {
         Set<Character.UnicodeBlock> japaneseUnicodeBlocks = new HashSet<Character.UnicodeBlock>() {{
             add(Character.UnicodeBlock.HIRAGANA);
