@@ -8,10 +8,22 @@ import java.util.concurrent.Executors;
 
 public class Jisho {
     private List<String> wordList;
+    private String bookTitle;
+    private String creators;
     private ArrayList<Word> searchedWords = new ArrayList<>();
 
-    public Jisho(List<String> wordList) {
+    public Jisho(List<String> wordList, String bookTitle, String creators) {
         this.wordList = wordList;
+        this.bookTitle = bookTitle;
+        this.creators = creators;
+    }
+
+    public String getBookTitle() {
+        return bookTitle;
+    }
+
+    public String getCreators() {
+        return creators;
     }
 
     @Override

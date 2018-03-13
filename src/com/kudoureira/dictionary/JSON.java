@@ -2,6 +2,7 @@ package com.kudoureira.dictionary;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.kudoureira.crawlKindle.ParsedBook;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -14,20 +15,16 @@ import java.util.ArrayList;
 
 public class JSON {
     private String outputPath = "./object-path-sample.json";
-    private ArrayList<Word> bookWords;
+    private ArrayList<ParsedBook> parsedCollection;
     private String tempJSON;
 
-    public JSON(ArrayList<Word> bookWords) {
-        this.bookWords = bookWords;
-    }
-
-    public void test() {
-        System.out.println("this is json class running");
+    public JSON(ArrayList<ParsedBook> parsedCollection) {
+        this.parsedCollection = parsedCollection;
     }
 
     public void createJSON() {
         Gson gson = new Gson();
-        tempJSON = gson.toJson(bookWords);
+        tempJSON = gson.toJson(parsedCollection);
     }
 
     public void postJSON() throws IOException{
@@ -51,7 +48,7 @@ public class JSON {
 //        System.out.println(bookWords);
         try {
             temp = new FileWriter(outputPath);
-            gson.toJson(bookWords, temp);
+            gson.toJson(parsedCollection, temp);
 //            temp.close();
 
         } finally {

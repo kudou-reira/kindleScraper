@@ -111,6 +111,7 @@ public class Controller implements Initializable{
             HTMLScrape notebook = new HTMLScrape(files);
             notebook.scan();
             System.out.println("this is books " + notebook.getBooks().toString());
+            // novels gets an array list of books
             Novels novels = new Novels(notebook.getBooks());
             novels.compile();
         }
@@ -125,6 +126,7 @@ public class Controller implements Initializable{
 
         JFrame frame = new JFrame("Simple GUI");
         FileDialog fd = new FileDialog(frame, "Choose a file", FileDialog.LOAD);
+        fd.setMultipleMode(true);
         fd.setDirectory(testPath);
         fd.setFile("*.html");
         fd.setVisible(true);

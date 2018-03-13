@@ -1,6 +1,7 @@
 package com.kudoureira.dictionary;
 
 import com.kudoureira.crawlKindle.Book;
+import com.kudoureira.crawlKindle.ParsedBook;
 
 import java.io.IOException;
 import java.util.*;
@@ -10,6 +11,7 @@ import java.util.concurrent.Executors;
 
 public class Novels {
     private ArrayList<Book> novels = new ArrayList<>();
+    private ArrayList<ParsedBook> parsedCollection = new ArrayList<>();
 
     public Novels(ArrayList<Book> novels) {
         this.novels = novels;
@@ -59,33 +61,38 @@ public class Novels {
                         System.out.println("this is FINAL book searched words " + book.getSearchedWords().toString());
                         // probably next should take this function and convert to csv
                         ArrayList<Word> bookWords = book.getSearchedWords();
-                        JSON tempJSON = new JSON(bookWords);
-                        System.out.println("should pretty print");
+                        ParsedBook parse = new ParsedBook(book.getBookTitle(), book.getCreators(), bookWords);
+                        parsedCollection.add(parse);
 
-                        // thinking about design now
-                        // if i'm sending it to a server, then i'll bundle it all into an arraylist of json objects
+//                        JSON tempJSON = new JSON(bookWords);
+//                        System.out.println("should pretty print");
+//
+//                        tempJSON.createJSON();
 //                        try {
-//                            tempJSON.fileJSON();
+//                            tempJSON.postJSON();
 //                        } catch (IOException e) {
 //                            e.printStackTrace();
 //                        }
-
-                        tempJSON.createJSON();
-                        try {
-                            tempJSON.postJSON();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-
-
                     });
         } catch(InterruptedException e) {
             e.printStackTrace();
         }
 
-//        com.kudoureira.dictionary.Jisho temp1 = new com.kudoureira.dictionary.Jisho(book1);
-//        temp1.fetchData();
-//        System.out.println(temp1.getSearchedWords().toString());
+        JSON tempJSON = new JSON(parsedCollection);
+        System.out.println("should pretty print");
+
+//        tempJSON.createJSON();
+//        try {
+//            tempJSON.fileJSON();
+//        } catch(IOException e) {
+//            //
+//        }
+
+        try {
+            tempJSON.postJSON();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private List<Callable<Jisho>> createLists() {
@@ -94,7 +101,7 @@ public class Novels {
         for(Book temp : novels) {
             // i think instantiate the book title too
             List<String> words = new ArrayList<>(temp.getWords());
-            tempCallables.add(() -> new Jisho(words));
+            tempCallables.add(() -> new Jisho(words, temp.getBookTitle(), temp.getCreators()));
         }
         return tempCallables;
     }
