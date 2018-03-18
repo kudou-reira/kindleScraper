@@ -15,6 +15,7 @@
     <Button fx:id="changeKindleScraper" text="Use kindle scraper instead" GridPane.rowIndex="10" GridPane.columnIndex="2"
             onAction="#onKindleScraperButtonClicked"/>
     <Button fx:id="parseFiles" text="Scan files" GridPane.rowIndex="4" GridPane.columnIndex="2"
-            onAction="#onParseButtonClicked"/>
+            onAction="#onParseButtonClicked" disable="true"/>
     <Label fx:id="filesLabel" text="No files selected" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+    <Label fx:id="processedLabel" text="" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
 </GridPane>

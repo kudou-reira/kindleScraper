@@ -20,11 +20,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable{
-    File[] files;
+    private File[] files;
 
     @FXML
     private TextField emailField;
@@ -36,6 +38,8 @@ public class Controller implements Initializable{
     private Label ourLabel;
     @FXML
     private Label filesLabel;
+    @FXML
+    private Label processedLabel;
     @FXML
     private Button loginButton;
     @FXML
@@ -114,6 +118,16 @@ public class Controller implements Initializable{
             // novels gets an array list of books
             Novels novels = new Novels(notebook.getBooks());
             novels.compile();
+
+            StringBuilder stringBuilder = new StringBuilder();
+            for(String link : novels.getProcessedLinks()) {
+                stringBuilder.append(link);
+                stringBuilder.append(System.getProperty("line.separator"));
+            }
+
+            String finalString = stringBuilder.toString();;
+
+            processedLabel.setText(finalString);
         }
     }
 
@@ -141,6 +155,7 @@ public class Controller implements Initializable{
                 sb.append("\n");
             }
             filesLabel.setText("These are your selected files" + "\n" + sb);
+            parseFiles.setDisable(false);
         }
 
 //        if (filename == null)

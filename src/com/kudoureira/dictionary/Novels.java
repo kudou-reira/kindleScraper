@@ -12,9 +12,14 @@ import java.util.concurrent.Executors;
 public class Novels {
     private ArrayList<Book> novels = new ArrayList<>();
     private ArrayList<ParsedBook> parsedCollection = new ArrayList<>();
+    private ArrayList<String> processedLinks = new ArrayList<>();
 
     public Novels(ArrayList<Book> novels) {
         this.novels = novels;
+    }
+
+    public ArrayList<String> getProcessedLinks() {
+        return processedLinks;
     }
 
     public void compile() {
@@ -81,7 +86,8 @@ public class Novels {
         JSON tempJSON = new JSON(parsedCollection);
         System.out.println("should pretty print");
 
-//        tempJSON.createJSON();
+        tempJSON.createJSON();
+
 //        try {
 //            tempJSON.fileJSON();
 //        } catch(IOException e) {
@@ -89,7 +95,7 @@ public class Novels {
 //        }
 
         try {
-            tempJSON.postJSON();
+            processedLinks = tempJSON.postJSON();
         } catch (IOException e) {
             e.printStackTrace();
         }
